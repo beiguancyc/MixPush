@@ -22,11 +22,34 @@
 
 ## 集成步骤
 
-### 1. 添加依赖
+### 1. 配置项目根build.gradle
 
-在您的应用模块的 `build.gradle` 文件中添加依赖：
+首先在项目根目录的 `build.gradle` 文件中添加荣耀推送仓库和插件：
 
 ```gradle
+buildscript {
+    repositories {
+        maven { url 'https://developer.hihonor.com/repo' }
+    }
+    dependencies {
+        classpath 'com.hihonor.mcs:asplugin:2.0.1.300'  // 荣耀推送插件（必需）
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://developer.hihonor.com/repo' }
+    }
+}
+```
+
+### 2. 添加依赖
+
+在您的应用模块的 `build.gradle` 文件中：
+
+```gradle
+apply plugin: 'com.hihonor.mcs.asplugin'  // 应用荣耀推送插件
+
 dependencies {
     implementation project(path: ':mixpush-core')
     implementation project(path: ':mixpush-honor')
@@ -34,17 +57,19 @@ dependencies {
 }
 ```
 
-**注意**: 荣耀推送模块内部已包含 `com.hihonor.mcs:push:8.3.6498` 依赖，无需额外添加。
+**注意**: 荣耀推送模块内部已包含 `com.hihonor.mcs:push:8.0.12.307` 依赖，无需额外添加。
 
-### 2. 配置文件
+### 3. 配置文件
 
 将从荣耀开发者控制台下载的 `mcs-services.json` 文件放置到应用模块的 `src/main/` 目录下。
 
-### 3. 权限配置
+**重要**: `com.hihonor.mcs:asplugin` 插件会自动处理 `mcs-services.json` 配置文件，类似华为推送的 `agconnect-services.json` 处理方式。
+
+### 4. 权限配置
 
 荣耀推送模块会自动添加必要的权限，无需手动配置。
 
-### 4. 初始化
+### 5. 初始化
 
 在您的 Application 中初始化 MixPush：
 
@@ -72,7 +97,7 @@ class MyApplication : Application() {
 }
 ```
 
-### 5. 消息接收
+### 6. 消息接收
 
 实现推送消息接收器：
 
