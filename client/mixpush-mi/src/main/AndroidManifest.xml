@@ -69,12 +69,17 @@
                 android:value="scene|voip" />
         </activity>
 
+        <!-- MI_APP_ID 和 MI_APP_KEY 应该由使用库的应用在其 AndroidManifest.xml 中配置 -->
+        <!-- 小米推送SDK会通过getMetaData方法读取这些值 -->
+        <!-- 
+        示例配置：
         <meta-data
             android:name="MI_APP_ID"
-            android:value="UNIFIEDPUSH-${MI_APP_ID}" />
+            android:value="your_xiaomi_app_id" />
         <meta-data
             android:name="MI_APP_KEY"
-            android:value="UNIFIEDPUSH-${MI_APP_KEY}" />
+            android:value="your_xiaomi_app_key" />
+        -->
     </application>
 
 </manifest>
