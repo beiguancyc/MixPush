@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        package="com.mixpush.meizu">
+        xmlns:tools="http://schemas.android.com/tools">
     <!-- 最低支持 19-->
     <uses-sdk tools:overrideLibrary="com.meizu.cloud.pushinternal" />
 

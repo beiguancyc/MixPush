@@ -1,9 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace 'com.unifiedpush.fcm'
     compileSdkVersion 30
-
-
 
     defaultConfig {
         minSdkVersion 14

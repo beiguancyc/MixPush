@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace 'com.mixpush.vivo'
     compileSdkVersion 34
 
     defaultConfig {

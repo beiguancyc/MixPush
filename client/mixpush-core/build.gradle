@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace 'com.mixpush.core'
     compileSdkVersion 34
 
     defaultConfig {
