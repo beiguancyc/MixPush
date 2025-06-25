@@ -1,0 +1,45 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 荣耀推送相关权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-sdk tools:overrideLibrary="com.hihonor.push,com.hihonor.mcs" />
+
+    <application>
+        <!-- 荣耀推送消息服务 -->
+        <service
+            android:name="com.mixpush.honor.MixPushHonorMessageService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.hihonor.push.action.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        
+        <!-- 荣耀推送消息接收Activity -->
+        <activity
+            android:name="com.mixpush.honor.HonorMessageReceiveActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true">
+            <intent-filter>
+                <data
+                    android:host="com.mixpush.honor"
+                    android:path="/message"
+                    android:scheme="mixpush" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+    </application>
+
+    <!-- 荣耀推送服务查询 -->
+    <queries>
+        <intent>
+            <action android:name="com.hihonor.push.action.BIND_PUSH_SERVICE" />
+        </intent>
+    </queries>
+</manifest> 

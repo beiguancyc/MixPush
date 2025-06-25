@@ -81,6 +81,7 @@ public class MixPushClient {
         addPlatformProviderByClassName("com.mixpush.mi.MiPushProvider");
         addPlatformProviderByClassName("com.mixpush.meizu.MeizuPushProvider");
         addPlatformProviderByClassName("com.mixpush.huawei.HuaweiPushProvider");
+        addPlatformProviderByClassName("com.mixpush.honor.HonorPushProvider");
         addPlatformProviderByClassName("com.mixpush.oppo.OppoPushProvider");
         addPlatformProviderByClassName("com.mixpush.vivo.VivoPushProvider");
 

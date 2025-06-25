@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">mixpush-honor</string>
+    <string name="honor_push_name">荣耀推送</string>
+    <string name="honor_push_description">荣耀设备推送服务</string>
+</resources> 
