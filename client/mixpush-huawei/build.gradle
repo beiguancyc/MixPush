@@ -23,6 +23,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':mixpush-core')
+    
+    // 华为推送SDK
     implementation 'com.huawei.hms:push:6.12.0.300'
 }
 
@@ -36,6 +38,35 @@ afterEvaluate {
                 groupId = 'com.github.beiguancyc.mixpush'
                 artifactId = 'mixpush-huawei'
                 version = project.hasProperty('version') ? project.version : '1.0.0'
+                
+                // 添加依赖信息到POM
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    
+                    // 添加核心模块依赖
+                    def coreDep = dependenciesNode.appendNode('dependency')
+                    coreDep.appendNode('groupId', 'com.github.beiguancyc.mixpush')
+                    coreDep.appendNode('artifactId', 'mixpush-core')
+                    coreDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
+                    coreDep.appendNode('scope', 'compile')
+                    
+                    // 添加华为HMS依赖
+                    def pushdep = dependenciesNode.appendNode('dependency')
+                    pushdep.appendNode('groupId', 'com.huawei.hms')
+                    pushdep.appendNode('artifactId', 'push')
+                    pushdep.appendNode('version', '6.12.0.300')
+                    pushdep.appendNode('scope', 'compile')
+                }
+                
+                // 在POM中明确指定华为Maven仓库
+                pom.withXml {
+                    def repositoriesNode = asNode().appendNode('repositories')
+                    
+                    def huaweiRepo = repositoriesNode.appendNode('repository')
+                    huaweiRepo.appendNode('id', 'huawei-developer')
+                    huaweiRepo.appendNode('name', 'Huawei Developer Repository')
+                    huaweiRepo.appendNode('url', 'https://developer.huawei.com/repo/')
+                }
             }
         }
     }

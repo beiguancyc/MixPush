@@ -40,6 +40,24 @@ afterEvaluate {
                 groupId = 'com.github.beiguancyc.mixpush'
                 artifactId = 'mixpush-vivo'
                 version = project.hasProperty('version') ? project.version : '1.0.0'
+                
+                // 包含本地AAR文件到发布artifact中
+                artifact("libs/vpush_clientSDK_v4.0.6.0_506.aar") {
+                    classifier = 'vivo-sdk'
+                    extension = 'aar'
+                }
+                
+                // 添加依赖信息到POM
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    
+                    // 添加核心模块依赖
+                    def coreDep = dependenciesNode.appendNode('dependency')
+                    coreDep.appendNode('groupId', 'com.github.beiguancyc.mixpush')
+                    coreDep.appendNode('artifactId', 'mixpush-core')
+                    coreDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
+                    coreDep.appendNode('scope', 'compile')
+                }
             }
         }
     }

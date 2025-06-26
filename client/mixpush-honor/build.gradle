@@ -36,6 +36,35 @@ afterEvaluate {
                 groupId = 'com.github.beiguancyc.mixpush'
                 artifactId = 'mixpush-honor'
                 version = project.hasProperty('version') ? project.version : '1.0.0'
+                
+                // 添加依赖信息到POM
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    
+                    // 添加核心模块依赖
+                    def coreDep = dependenciesNode.appendNode('dependency')
+                    coreDep.appendNode('groupId', 'com.github.beiguancyc.mixpush')
+                    coreDep.appendNode('artifactId', 'mixpush-core')
+                    coreDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
+                    coreDep.appendNode('scope', 'compile')
+                    
+                    // 添加荣耀推送依赖
+                    def honorDep = dependenciesNode.appendNode('dependency')
+                    honorDep.appendNode('groupId', 'com.hihonor.mcs')
+                    honorDep.appendNode('artifactId', 'push')
+                    honorDep.appendNode('version', '8.0.12.307')
+                    honorDep.appendNode('scope', 'compile')
+                }
+                
+                // 在POM中明确指定荣耀Maven仓库
+                pom.withXml {
+                    def repositoriesNode = asNode().appendNode('repositories')
+                    
+                    def honorRepo = repositoriesNode.appendNode('repository')
+                    honorRepo.appendNode('id', 'honor-developer')
+                    honorRepo.appendNode('name', 'Honor Developer Repository')
+                    honorRepo.appendNode('url', 'https://developer.hihonor.com/repo')
+                }
             }
         }
     }

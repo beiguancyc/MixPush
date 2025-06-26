@@ -59,7 +59,7 @@ allprojects {
     }
 }
 
-// 为 JitPack 提供基本的 Maven 发布配置
+// 为 JitPack 提供聚合所有子模块的 Maven 发布配置
 apply plugin: 'maven-publish'
 
 publishing {
@@ -68,6 +68,32 @@ publishing {
             groupId = 'com.github.beiguancyc'
             artifactId = 'mixpush'
             version = project.hasProperty('version') ? project.version : '1.0.0'
+            
+            // 聚合所有子模块作为依赖
+            pom {
+                withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    
+                    // 添加所有子模块作为依赖
+                    def addDependency = { groupId, artifactId, version ->
+                        def dependency = dependenciesNode.appendNode('dependency')
+                        dependency.appendNode('groupId', groupId)
+                        dependency.appendNode('artifactId', artifactId)
+                        dependency.appendNode('version', version)
+                        dependency.appendNode('scope', 'runtime')
+                    }
+                    
+                    def ver = project.hasProperty('version') ? project.version : '1.0.0'
+                    addDependency('com.github.beiguancyc.mixpush', 'mixpush-core', ver)
+                    addDependency('com.github.beiguancyc.mixpush', 'mixpush-mi', ver)
+                    addDependency('com.github.beiguancyc.mixpush', 'mixpush-huawei', ver)
+                    addDependency('com.github.beiguancyc.mixpush', 'mixpush-honor', ver)
+                    addDependency('com.github.beiguancyc.mixpush', 'mixpush-oppo', ver)
+                    addDependency('com.github.beiguancyc.mixpush', 'mixpush-vivo', ver)
+                    addDependency('com.github.beiguancyc.mixpush', 'mixpush-meizu', ver)
+                    addDependency('com.github.beiguancyc.mixpush', 'mixpush-fcm', ver)
+                }
+            }
         }
     }
 }
