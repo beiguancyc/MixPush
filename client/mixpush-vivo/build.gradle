@@ -64,6 +64,7 @@ afterEvaluate {
                     sdkDep.appendNode('artifactId', 'mixpush-vivo')
                     sdkDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
                     sdkDep.appendNode('classifier', 'vivo-sdk')
+                    sdkDep.appendNode('type', 'aar')
                     sdkDep.appendNode('scope', 'compile')
                 }
             }
