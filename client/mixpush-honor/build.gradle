@@ -17,14 +17,6 @@ android {
     }
 }
 
-allprojects {
-    repositories {
-        maven {
-            url 'https://developer.hihonor.com/repo/'
-        }
-    }
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':mixpush-core')
