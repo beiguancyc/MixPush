@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android {
     namespace 'com.mixpush.mi'
@@ -28,4 +29,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(name: 'MiPush_SDK_Client_6_0_1-C_3rd', ext: 'aar')
     implementation project(path: ':mixpush-core')
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.beiguancyc.mixpush'
+                artifactId = 'mixpush-mi'
+                version = project.hasProperty('version') ? project.version : '1.0.0'
+            }
+        }
+    }
 }

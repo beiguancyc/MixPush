@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 
 android {
@@ -30,4 +31,18 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':mixpush-core')
     implementation 'com.huawei.hms:push:6.12.0.300'
+}
+
+// Maven 发布配置  
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.beiguancyc.mixpush'
+                artifactId = 'mixpush-huawei'
+                version = project.hasProperty('version') ? project.version : '1.0.0'
+            }
+        }
+    }
 }

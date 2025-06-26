@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android {
     namespace 'com.mixpush.vivo'
@@ -28,4 +29,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(name: 'vpush_clientSDK_v4.0.6.0_506', ext: 'aar')
     implementation project(path: ':mixpush-core')
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.beiguancyc.mixpush'
+                artifactId = 'mixpush-vivo'
+                version = project.hasProperty('version') ? project.version : '1.0.0'
+            }
+        }
+    }
 }

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android {
     namespace 'com.mixpush.oppo'
@@ -28,4 +29,17 @@ dependencies {
     implementation(name: 'com.heytap.msp_V3.5.3', ext: 'aar')
     implementation project(path: ':mixpush-core')
     implementation 'commons-codec:commons-codec:1.6'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.beiguancyc.mixpush'
+                artifactId = 'mixpush-oppo'  
+                version = project.hasProperty('version') ? project.version : '1.0.0'
+            }
+        }
+    }
 }

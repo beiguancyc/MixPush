@@ -31,3 +31,19 @@ dependencies {
     // 荣耀推送SDK
     implementation 'com.hihonor.mcs:push:8.0.12.307'
 }
+
+// Maven 发布配置
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.beiguancyc.mixpush'
+                artifactId = 'mixpush-honor'
+                version = project.hasProperty('version') ? project.version : '1.0.0'
+            }
+        }
+    }
+}
