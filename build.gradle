@@ -30,6 +30,9 @@ allprojects {
         maven {
             url 'https://developer.hihonor.com/repo'
         }
+        flatDir {
+            dirs rootProject.file('client/mixpush-mi/libs'), rootProject.file('client/mixpush-oppo/libs'), rootProject.file('client/mixpush-vivo/libs')
+        }
     }
 }
 

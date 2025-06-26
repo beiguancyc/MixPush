@@ -6,21 +6,21 @@ android {
     namespace 'com.mixpush.example'
     compileSdk 31
     defaultConfig {
-        applicationId EXAMPLE_APPLICATION_ID
+        applicationId project.hasProperty('EXAMPLE_APPLICATION_ID') ? EXAMPLE_APPLICATION_ID : 'com.mixpush.example'
         minSdkVersion 19
         targetSdkVersion 31
         versionCode 10
         versionName "1.1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
-        manifestPlaceholders["VIVO_APP_ID"] = EXAMPLE_VIVO_APP_ID
-        manifestPlaceholders["VIVO_APP_KEY"] = EXAMPLE_VIVO_APP_KEY
-        manifestPlaceholders["MI_APP_ID"] = EXAMPLE_MI_APP_ID
-        manifestPlaceholders["MI_APP_KEY"] = EXAMPLE_MI_APP_KEY
-        manifestPlaceholders["OPPO_APP_KEY"] = EXAMPLE_OPPO_APP_KEY
-        manifestPlaceholders["OPPO_APP_SECRET"] = EXAMPLE_OPPO_APP_SECRET
-        manifestPlaceholders["MEIZU_APP_ID"] = EXAMPLE_MEIZU_APP_ID
-        manifestPlaceholders["MEIZU_APP_KEY"] = EXAMPLE_MEIZU_APP_KEY
+        manifestPlaceholders["VIVO_APP_ID"] = project.hasProperty('EXAMPLE_VIVO_APP_ID') ? EXAMPLE_VIVO_APP_ID : 'example_vivo_app_id'
+        manifestPlaceholders["VIVO_APP_KEY"] = project.hasProperty('EXAMPLE_VIVO_APP_KEY') ? EXAMPLE_VIVO_APP_KEY : 'example_vivo_app_key'
+        manifestPlaceholders["MI_APP_ID"] = project.hasProperty('EXAMPLE_MI_APP_ID') ? EXAMPLE_MI_APP_ID : '1'
+        manifestPlaceholders["MI_APP_KEY"] = project.hasProperty('EXAMPLE_MI_APP_KEY') ? EXAMPLE_MI_APP_KEY : '2'
+        manifestPlaceholders["OPPO_APP_KEY"] = project.hasProperty('EXAMPLE_OPPO_APP_KEY') ? EXAMPLE_OPPO_APP_KEY : 'example_oppo_app_key'
+        manifestPlaceholders["OPPO_APP_SECRET"] = project.hasProperty('EXAMPLE_OPPO_APP_SECRET') ? EXAMPLE_OPPO_APP_SECRET : 'example_oppo_app_secret'
+        manifestPlaceholders["MEIZU_APP_ID"] = project.hasProperty('EXAMPLE_MEIZU_APP_ID') ? EXAMPLE_MEIZU_APP_ID : 'example_meizu_app_id'
+        manifestPlaceholders["MEIZU_APP_KEY"] = project.hasProperty('EXAMPLE_MEIZU_APP_KEY') ? EXAMPLE_MEIZU_APP_KEY : 'example_meizu_app_key'
     }
     signingConfigs {
         release {
@@ -29,6 +29,13 @@ android {
             storePassword ""
             storeFile file('.jks')
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
     buildTypes {
         release {

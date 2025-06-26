@@ -8,11 +8,7 @@ android {
         minSdkVersion 19
     }
 
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
+
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
