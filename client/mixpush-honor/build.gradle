@@ -31,5 +31,3 @@ dependencies {
     // 荣耀推送SDK
     implementation 'com.hihonor.mcs:push:8.0.12.307'
 }
-
-apply from: '../../maven_public.gradle' 

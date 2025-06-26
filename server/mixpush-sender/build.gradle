@@ -16,6 +16,3 @@ dependencies {
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
-
-
-apply from: '../../maven_public.gradle'

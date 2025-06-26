@@ -22,4 +22,3 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "androidx.annotation:annotation:1.8.1"
 }
-apply from: '../../maven_public.gradle'

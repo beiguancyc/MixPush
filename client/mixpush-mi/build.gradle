@@ -29,5 +29,3 @@ dependencies {
     implementation(name: 'MiPush_SDK_Client_6_0_1-C_3rd', ext: 'aar')
     implementation project(path: ':mixpush-core')
 }
-
-apply from: '../../maven_public.gradle'

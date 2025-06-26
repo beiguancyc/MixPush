@@ -29,4 +29,3 @@ dependencies {
     implementation project(path: ':mixpush-core')
     implementation 'commons-codec:commons-codec:1.6'
 }
-apply from: '../../maven_public.gradle'
