@@ -27,7 +27,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation(name: 'vpush_clientSDK_v4.0.6.0_506', ext: 'aar')
+    api(name: 'vpush_clientSDK_v4.0.6.0_506', ext: 'aar')
     implementation project(path: ':mixpush-core')
 }
 
@@ -57,15 +57,6 @@ afterEvaluate {
                     coreDep.appendNode('artifactId', 'mixpush-core')
                     coreDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
                     coreDep.appendNode('scope', 'compile')
-                    
-                    // 添加 Vivo推送SDK依赖（指向同一个包的不同classifier）
-                    def vivoSdkDep = dependenciesNode.appendNode('dependency')
-                    vivoSdkDep.appendNode('groupId', 'com.github.beiguancyc.mixpush')
-                    vivoSdkDep.appendNode('artifactId', 'mixpush-vivo')
-                    vivoSdkDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
-                    vivoSdkDep.appendNode('classifier', 'vivo-sdk')
-                    vivoSdkDep.appendNode('type', 'aar')
-                    vivoSdkDep.appendNode('scope', 'compile')
                 }
             }
         }
