@@ -27,7 +27,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api(name: 'MiPush_SDK_Client_6_0_1-C_3rd', ext: 'aar')
+    compileOnly(name: 'MiPush_SDK_Client_6_0_1-C_3rd', ext: 'aar')
     implementation project(path: ':mixpush-core')
 }
 

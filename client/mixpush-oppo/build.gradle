@@ -24,7 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api(name: 'com.heytap.msp_V3.5.3', ext: 'aar')
+    compileOnly(name: 'com.heytap.msp_V3.5.3', ext: 'aar')
     implementation project(path: ':mixpush-core')
     implementation 'commons-codec:commons-codec:1.6'
 }
