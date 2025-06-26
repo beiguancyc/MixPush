@@ -56,3 +56,16 @@ allprojects {
         options.addStringOption('encoding', 'UTF-8')
     }
 }
+
+// 为 JitPack 提供基本的 Maven 发布配置
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.github.beiguancyc'
+            artifactId = 'mixpush'
+            version = project.hasProperty('version') ? project.version : '1.0.0'
+        }
+    }
+}
