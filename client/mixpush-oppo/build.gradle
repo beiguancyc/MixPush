@@ -31,14 +31,16 @@ dependencies {
     implementation 'commons-codec:commons-codec:1.6'
 }
 
-publishing {
-    publications {
-        release(MavenPublication) {
-            // 不使用 components，手动添加 AAR 文件
-            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-            groupId = 'com.github.beiguancyc.mixpush'
-            artifactId = 'mixpush-oppo'  
-            version = project.hasProperty('version') ? project.version : '1.0.0'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // 使用 bundleReleaseAar 任务的输出
+                artifact bundleReleaseAar
+                groupId = 'com.github.beiguancyc.mixpush'
+                artifactId = 'mixpush-oppo'  
+                version = project.hasProperty('version') ? project.version : '1.0.0'
+            }
         }
     }
 }

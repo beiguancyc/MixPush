@@ -24,14 +24,16 @@ dependencies {
     implementation "androidx.annotation:annotation:1.8.1"
 }
 
-publishing {
-    publications {
-        release(MavenPublication) {
-            // 不使用 components，手动添加 AAR 文件
-            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-            groupId = 'com.github.beiguancyc.mixpush'
-            artifactId = 'mixpush-core'
-            version = project.hasProperty('version') ? project.version : '1.0.0'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // 使用 bundleReleaseAar 任务的输出
+                artifact bundleReleaseAar
+                groupId = 'com.github.beiguancyc.mixpush'
+                artifactId = 'mixpush-core'
+                version = project.hasProperty('version') ? project.version : '1.0.0'
+            }
         }
     }
 }
