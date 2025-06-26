@@ -29,7 +29,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(name: 'vpush_clientSDK_v4.0.6.0_506', ext: 'aar')
     implementation project(path: ':mixpush-core')
 }
 apply from: '../../maven_public.gradle'
