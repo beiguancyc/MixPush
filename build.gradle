@@ -1,5 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+// 加载 Android 配置
+Properties androidProps = new Properties()
+File androidPropsFile = file('android.properties')
+if (androidPropsFile.exists()) {
+    androidPropsFile.withInputStream { androidProps.load(it) }
+    androidProps.each { key, value ->
+        project.ext.set(key, value)
+    }
+}
+
 buildscript {
     ext.kotlin_version = '2.1.10'
     repositories {
@@ -21,6 +31,10 @@ buildscript {
 }
 
 allprojects {
+    // 确保所有子项目都启用 AndroidX
+    project.ext.set("android.useAndroidX", true)
+    project.ext.set("android.enableJetifier", true)
+    
     repositories {
         google()
         mavenCentral()
