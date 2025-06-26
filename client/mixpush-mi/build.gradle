@@ -35,30 +35,32 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                // 使用 bundleReleaseAar 任务的输出
-                artifact bundleReleaseAar
-                groupId = 'com.github.beiguancyc.mixpush'
-                artifactId = 'mixpush-mi'
-                version = project.hasProperty('version') ? project.version : '1.0.0'
-                
-                // 包含本地AAR文件到发布artifact中
+                // 1. 禁用 Gradle Module Metadata，强制使用 pom.xml
+                suppressAllPomMetadataWarnings()
+
+                // 2. 指定发布的 artifact
+                artifact(bundleReleaseAar) {
+                    // 主 artifact
+                }
                 artifact("libs/MiPush_SDK_Client_6_0_1-C_3rd.aar") {
                     classifier = 'mipush-sdk'
                     extension = 'aar'
                 }
-                
-                // 添加依赖信息到POM
+
+                groupId = 'com.github.beiguancyc.mixpush'
+                artifactId = 'mixpush-mi'
+                version = project.hasProperty('version') ? project.version : '1.0.0'
+
+                // 3. 在 POM 中声明依赖
                 pom.withXml {
                     def dependenciesNode = asNode().appendNode('dependencies')
-                    
-                    // 添加核心模块依赖
+
                     def coreDep = dependenciesNode.appendNode('dependency')
                     coreDep.appendNode('groupId', 'com.github.beiguancyc.mixpush')
                     coreDep.appendNode('artifactId', 'mixpush-core')
                     coreDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
                     coreDep.appendNode('scope', 'compile')
 
-                    // 关键：添加对我们刚刚上传的AAR的依赖
                     def sdkDep = dependenciesNode.appendNode('dependency')
                     sdkDep.appendNode('groupId', 'com.github.beiguancyc.mixpush')
                     sdkDep.appendNode('artifactId', 'mixpush-mi')
