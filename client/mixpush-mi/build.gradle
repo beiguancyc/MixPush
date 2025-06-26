@@ -57,6 +57,14 @@ afterEvaluate {
                     coreDep.appendNode('artifactId', 'mixpush-core')
                     coreDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
                     coreDep.appendNode('scope', 'compile')
+
+                    // 关键：添加对我们刚刚上传的AAR的依赖
+                    def sdkDep = dependenciesNode.appendNode('dependency')
+                    sdkDep.appendNode('groupId', 'com.github.beiguancyc.mixpush')
+                    sdkDep.appendNode('artifactId', 'mixpush-mi')
+                    sdkDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
+                    sdkDep.appendNode('classifier', 'mipush-sdk')
+                    sdkDep.appendNode('scope', 'compile')
                 }
             }
         }
