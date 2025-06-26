@@ -33,6 +33,18 @@ afterEvaluate {
                 groupId = 'com.github.beiguancyc.mixpush'
                 artifactId = 'mixpush-core'
                 version = project.hasProperty('version') ? project.version : '1.0.0'
+                
+                // 添加依赖信息到POM
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    
+                    // 添加 androidx.annotation 依赖
+                    def annotationDep = dependenciesNode.appendNode('dependency')
+                    annotationDep.appendNode('groupId', 'androidx.annotation')
+                    annotationDep.appendNode('artifactId', 'annotation')
+                    annotationDep.appendNode('version', '1.8.1')
+                    annotationDep.appendNode('scope', 'compile')
+                }
             }
         }
     }

@@ -58,6 +58,15 @@ afterEvaluate {
                     coreDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
                     coreDep.appendNode('scope', 'compile')
                     
+                    // 添加 OPPO推送SDK依赖（指向同一个包的不同classifier）
+                    def oppoSdkDep = dependenciesNode.appendNode('dependency')
+                    oppoSdkDep.appendNode('groupId', 'com.github.beiguancyc.mixpush')
+                    oppoSdkDep.appendNode('artifactId', 'mixpush-oppo')
+                    oppoSdkDep.appendNode('version', project.hasProperty('version') ? project.version : '1.0.0')
+                    oppoSdkDep.appendNode('classifier', 'oppo-sdk')
+                    oppoSdkDep.appendNode('type', 'aar')
+                    oppoSdkDep.appendNode('scope', 'compile')
+                    
                     // 添加 commons-codec 依赖
                     def codecDep = dependenciesNode.appendNode('dependency')
                     codecDep.appendNode('groupId', 'commons-codec')
