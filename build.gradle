@@ -23,10 +23,6 @@ buildscript {
 }
 
 allprojects {
-    // 确保所有子项目都启用 AndroidX
-    project.ext.set("android.useAndroidX", true)
-    project.ext.set("android.enableJetifier", true)
-    
     repositories {
         google()
         mavenCentral()
